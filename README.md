@@ -11,8 +11,11 @@
 <describe the purpose of this repository, the information it contains, and any relevant analysis goals. What, why, where, when, how?>
 
 ## Investigators
-
-<name(s), affiliation(s), contact information, roles (if applicable)>
+Sanford School of Public Policy, Duke University
+Siyao Chen (MIDP 2024)
+Merve Onal (MIDP 2025)
+Ye Khaung Oo (MIDP 2025)
+Fei Wu (MPP 2025)
 
 ## Keywords
 
