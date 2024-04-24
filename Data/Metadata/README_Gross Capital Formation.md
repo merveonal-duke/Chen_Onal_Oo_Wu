@@ -16,7 +16,6 @@ Data were accessed 2024-04-04.
 Date: year
 
 Data on capital formation may be estimated from direct surveys of enterprises and administrative records or based on the commodity flow method using data from production, trade, and construction activities. The quality of data on government fixed capital formation depends on the quality of government accounting systems (which tend to be weak in developing countries). Measures of fixed capital formation by households and corporations - particularly capital outlays by small, unincorporated enterprises - are usually unreliable. 
-
 Download the zip files for the respective years at https://databank.worldbank.org/source/world-development-indicators
 
 
