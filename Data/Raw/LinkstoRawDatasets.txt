@@ -1,0 +1,5 @@
+# Electricity Statistics Datasets: Download the files for the respective years at (https://ytbsbilgi.teias.gov.tr/ytbsbilgi/frm_istatistikler.jsf)
+# Annual Gross Domestic Product: Download the files for the respective years at (https://data.tuik.gov.tr/Kategori/GetKategori?p=ulusal-hesaplar-113&dil=2)
+# Gross Capital Formation: Download the files for the respective years at (https://databank.worldbank.org/source/world-development-indicators)
+# Population: Download the files for the respective years at (https://databank.worldbank.org/source/world-development-indicators)
+
