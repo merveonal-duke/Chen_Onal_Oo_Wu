@@ -7,149 +7,135 @@
 \newpage
 
 ---
-title: "Time Series"
-author: "Merve Onal"
+title: "Factors influencing Turkiye's Growth"
+author: "Fei Wu, Merve Onal, Siyao Chen, Ye Khaung Oo"
 date: "2024-04-23"
 output: pdf_document
 geometry: margin=2.54cm
 editor_options: 
   chunk_output_type: console
 ---
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, tidy=TRUE}
 
-#Check your working directory
-#Load the tidyverse, lubridate, zoo, and trend packages
-#Set your ggplot theme
-
+#Checking working directory
 getwd()
-#install.packages
-library(tidyverse)
-library(lubridate)
-library(zoo)
-library(trend)
-library(readxl)
-library(here)
-library(foreign)
-library(dplyr)
 
-# Here I set the ggplot theme
+#Loading packages
+library(tidyverse); library(lubridate);library(zoo);
+library(trend); library(ggplot2); library(ggthemes);
+library(readxl); library(here); library(dplyr);
+
+#importing dataset
+
+#setting theme
 theme_set(theme_minimal())
 
 ```
 
 ```{r, message = FALSE}
 
-#Set your ggplot theme
-
-setwd('~/Chen_Onal_Oo_Wu/Data')
-
 # Here is the list of file names to import
-file_names <- c(
+#file_names <- c(
   "Data_for_R_Project.xlsx"
-)
+#)
 
 ```
 ```{r}
 
 # Set the directory path
-directory_path <- "~/Chen_Onal_Oo_Wu/Data"
+#directory_path <- "~/Chen_Onal_Oo_Wu/Data"
 
 # Define the file name
-file_name <- "Data_for_R_Project.xlsx"
+#file_name <- "Data_for_R_Project.xlsx"
 
 # Construct the full file path
-file_path <- file.path(directory_path, file_name)
+#file_path <- file.path(directory_path, file_name)
 
 # Read the Excel file into a data frame
-if (file.exists(file_path)) {
-  data <- read_excel(file_path)
+#if (file.exists(file_path)) {
+  #data <- read_excel(file_path)
   # Convert "Years" column to Date class
-  data <- mutate(data, Years = as.Date(Years, format = "%Y"))
-} else {
-  message("File", file_name, "not found.")
-}
+  #data <- mutate(data, Years = as.Date(Years, format = "%Y"))
+#} else {
+ # message("File", file_name, "not found.")
+#}
 
 ```
 
 ```{r}
 
 # Read the Excel file into a data frame
-if (file.exists(file_path)) {
-  data <- read_excel(file_path)
+#if (file.exists(file_path)) {
+  #data <- read_excel(file_path)
   # Convert "Years" column to Date class
-  data <- mutate(data, Years = as.Date(Years, format = "%Y"))
-} else {
-  message("File", file_name, "not found.")
-}
+  #data <- mutate(data, Years = as.Date(Years, format = "%Y"))
+#} else {
+  #message("File", file_name, "not found.")
+#}
 
 ```
 
 ```{r}
 # Here I create a sequence of dates from 1999 to 2022
 # Define the start and end years
-start_year <- 1999
-end_year <- 2022
+#start_year <- 1999
+#end_year <- 2022
 
 # Create a sequence of years from start_year to end_year
-year_sequence <- seq(start_year, end_year, by = 1)
+#year_sequence <- seq(start_year, end_year, by = 1)
 
 # Print the sequence of years
-year_sequence
+#year_sequence
 
 
 ```
 
 # Rationale and Research Questions
 
+Does electrcity consumption increase the GDP growth 
+
 ## Background
 
-here relationship between electricity consumption and gdp growth
+We analyze the effect of investment growth which corresponds to capital accumulation and population growth on the GDP growth of Turkiye for the 1999-2022 period. We also analyze the impact of electrcity consumption on the GDP growth.
 
 ## Significance
 
-Understanding the relationship between electricity consumption and GDP growth is crucial. Understanding the behavior of electricity consumption in relation to the economy is very important for improve
+Understanding the relationship between electrcity consumption and GDP growth is crucial. Understanding the behavior of electrcity consumption in relation to the economy is very important for improve
 a stable economic growth and development (Kasperowicz, 2014: 46).
 
 
 ## Theoretical Context
 
-The hypothesis underlying this research is that an increase in electricity consumption leads to GDP growth. This hypothesis is grounded in the understanding that investment, population and electricity consumption whixh explains GDP growth.
+The hypothesis underlying this research is that an increase in electrcity consumption leads to GDP growth. This hypothesis is grounded in the understanding that investment, population and electrcity consumption which explains GDP growth.
 
 ## Visualize
 ```{r}
-library(ggplot2)
-
-
 # Create the line plot
 
-gdp_plot <- ggplot(data = Data_for_R_Project, aes(x = Years)) +
-  geom_line(aes(y = GDPgro), color = "blue", linetype = "solid", linewidth = 1) +
-  geom_line(aes(y = Popgro), color = "red", linetype = "dashed", linewidth = 1) +
-  geom_line(aes(y = Invgro), color = "green", linetype = "dotted", linewidth = 1) +
-  geom_line(aes(y = Electirictygro), color = "orange", linetype = "dotdash", linewidth = 1) +
-  labs(title = "Trends Over Time",
-       x = "Years",
-       y = "Values") +
-   scale_y_continuous(labels = scales::comma,  
-                     limits = c(0, 10)) + 
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+#gdp_plot <- ggplot(data = Data_for_R_Project, aes(x = Years)) +
+  #geom_line(aes(y = GDPgro), color = "blue", linetype = "solid", linewidth = 1) +
+  #geom_line(aes(y = Popgro), color = "red", linetype = "dashed", linewidth = 1) +
+  #geom_line(aes(y = Invgro), color = "green", linetype = "dotted", linewidth = 1) +
+  #geom_line(aes(y = Electirictygro), color = "orange", linetype = "dotdash", linewidth = 1) +
+  #labs(title = "Trends Over Time",
+       #x = "Years",
+       #y = "Values") +
+   #scale_y_continuous(labels = scales::comma,  
+                     #limits = c(0, 10)) + 
+  #theme_minimal() +
+  #theme(axis.text.x = element_text(angle = 45, hjust = 1))
 # Print the plot
 # Print the plot
-print(gdp_plot) +
-  geom_line(aes(y = GDPgro), color = "blue", linetype = "solid", size = 1) +
-  geom_line(aes(y = Popgro), color = "red", linetype = "dashed", size = 1) +
-  geom_line(aes(y = Invgro), color = "green", linetype = "dotted", size = 1) +
-  geom_line(aes(y = Electirictygro), color = "orange", linetype = "dotdash", size = 1) +
-  labs(title = "Trends Over Time",
-       x = "Years",
-       y = "Values") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-
-
-
+#print(gdp_plot) +
+  #geom_line(aes(y = GDPgro), color = "blue", linetype = "solid", size = 1) +
+  #geom_line(aes(y = Popgro), color = "red", linetype = "dashed", size = 1) +
+  #geom_line(aes(y = Invgro), color = "green", linetype = "dotted", size = 1) +
+  #geom_line(aes(y = Electirictygro), color = "orange", linetype = "dotdash", size = 1) +
+  #labs(title = "Trends Over Time",
+      # x = "Years",
+      # y = "Values") +
+  #theme_minimal() +
+  #theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 ```
 
@@ -166,12 +152,64 @@ print(gdp_plot) +
 
 
 \newpage
+## Time Series Analysis
+```{r}
+setwd("~/Chen_Onal_Oo_Wu/Data/Processed")
+data <- read_excel("Data_for_R_Project.xlsx")
+str(data)
+data$Years <- as.Date(data$Years)
+ts_data <- ts(data$GDPgro, start = min(1999), end = max(2022), frequency = 1)
+plot(ts_data, main = "GDP Growth Over Time", xlab = "Years", ylab = "GDP Growth")
+plot(ts_data, main = "Investment Growth Over Time", xlab = "Years", ylab = "Investment growth")
+plot(ts_data, main = "Population Growth Over Time", xlab = "Years", ylab = "Population growth")
+plot(ts_data, main = "Electrcity Consumption Growth Over Time", xlab = "Years", ylab = "Electrcity consumption growth")
 
+install.packages("Rmisc")
+library(Rmisc)
+# Function to create time series plot with custom title and axis labels
+create_ts_plot <- function(data, variable_name, main_title, xlab_title, ylab_title) {
+  plot(data, main = main_title, xlab = xlab_title, ylab = ylab_title)
+}
+
+
+  # Remove rows with missing values in any of the columns
+  data <- na.omit(data)
+  
+library(ggplot2)
+
+# Assuming you have a data frame named 'my_data' containing columns 'Invgro', 'GDPgro', and 'Popgro'
+
+# Create the plot using ggplot2
+ggplot(data, aes(x = GDPgro, y = Invgro)) +
+  geom_line(color = "blue") 
+
+# Create the plot using ggplot2
+ggplot(data, aes(x = GDPgro, y = Popgro)) +
+  geom_line(color = "red") 
+ 
+# Create the plot using ggplot2
+ggplot(data, aes(x = GDPgro, y = Electirictygro)) +
+  geom_line(color = "green") 
+
+# Create the plot using ggplot2
+ggplot(data, aes(x = Invgro, y = Electirictygro)) +
+  geom_line(color = "black") 
+
+# Create the plot using ggplot2
+ggplot(data, aes(x = Popgro, y = Electirictygro)) +
+  geom_line(color = "yellow") 
+
+# Create the plot using ggplot2
+ggplot(data, aes(x = Invgro, y = Popgro)) +
+  geom_line(color = "purple") 
+
+```
 # Analysis
 
 
 
 ## Question 1: <insert specific question here and add additional subsections for additional questions below, if needed>
+Has electrcity consumption contributed to GDP growth during the period from 1999 to 2022 in Turkiye?
 
 ## Question 2: 
 
