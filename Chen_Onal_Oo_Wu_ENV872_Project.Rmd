@@ -7,94 +7,85 @@
 \newpage
 
 ---
-title: "Time Series"
-author: "Merve Onal"
+title: "Factors influencing Turkiye's Growth"
+author: "Fei Wu, Merve Onal, Siyao Chen, Ye Khaung Oo"
 date: "2024-04-23"
 output: pdf_document
 geometry: margin=2.54cm
 editor_options: 
   chunk_output_type: console
 ---
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, tidy=TRUE}
 
-#Check your working directory
-#Load the tidyverse, lubridate, zoo, and trend packages
-#Set your ggplot theme
-
+#Checking working directory
 getwd()
-#install.packages
-library(tidyverse)
-library(lubridate)
-library(zoo)
-library(trend)
-library(readxl)
-library(here)
-library(foreign)
-library(dplyr)
 
-# Here I set the ggplot theme
+#Loading packages
+library(tidyverse); library(lubridate);library(zoo);
+library(trend); library(ggplot2); library(ggthemes);
+library(readxl); library(here); library(dplyr);
+
+#importing dataset
+
+#setting theme
 theme_set(theme_minimal())
 
 ```
 
 ```{r, message = FALSE}
 
-#Set your ggplot theme
-
-setwd('~/Chen_Onal_Oo_Wu/Data')
-
 # Here is the list of file names to import
-file_names <- c(
+#file_names <- c(
   "Data_for_R_Project.xlsx"
-)
+#)
 
 ```
 ```{r}
 
 # Set the directory path
-directory_path <- "~/Chen_Onal_Oo_Wu/Data"
+#directory_path <- "~/Chen_Onal_Oo_Wu/Data"
 
 # Define the file name
-file_name <- "Data_for_R_Project.xlsx"
+#file_name <- "Data_for_R_Project.xlsx"
 
 # Construct the full file path
-file_path <- file.path(directory_path, file_name)
+#file_path <- file.path(directory_path, file_name)
 
 # Read the Excel file into a data frame
-if (file.exists(file_path)) {
-  data <- read_excel(file_path)
+#if (file.exists(file_path)) {
+  #data <- read_excel(file_path)
   # Convert "Years" column to Date class
-  data <- mutate(data, Years = as.Date(Years, format = "%Y"))
-} else {
-  message("File", file_name, "not found.")
-}
+  #data <- mutate(data, Years = as.Date(Years, format = "%Y"))
+#} else {
+ # message("File", file_name, "not found.")
+#}
 
 ```
 
 ```{r}
 
 # Read the Excel file into a data frame
-if (file.exists(file_path)) {
-  data <- read_excel(file_path)
+#if (file.exists(file_path)) {
+  #data <- read_excel(file_path)
   # Convert "Years" column to Date class
-  data <- mutate(data, Years = as.Date(Years, format = "%Y"))
-} else {
-  message("File", file_name, "not found.")
-}
+  #data <- mutate(data, Years = as.Date(Years, format = "%Y"))
+#} else {
+  #message("File", file_name, "not found.")
+#}
 
 ```
 
 ```{r}
 # Here I create a sequence of dates from 1999 to 2022
 # Define the start and end years
-start_year <- 1999
-end_year <- 2022
+#start_year <- 1999
+#end_year <- 2022
 
 # Create a sequence of years from start_year to end_year
-year_sequence <- seq(start_year, end_year, by = 1)
+#year_sequence <- seq(start_year, end_year, by = 1)
 
 # Print the sequence of years
-year_sequence
+#year_sequence
 
 
 ```
@@ -117,39 +108,32 @@ The hypothesis underlying this research is that an increase in electricity consu
 
 ## Visualize
 ```{r}
-library(ggplot2)
-
-
 # Create the line plot
 
-gdp_plot <- ggplot(data = Data_for_R_Project, aes(x = Years)) +
-  geom_line(aes(y = GDPgro), color = "blue", linetype = "solid", linewidth = 1) +
-  geom_line(aes(y = Popgro), color = "red", linetype = "dashed", linewidth = 1) +
-  geom_line(aes(y = Invgro), color = "green", linetype = "dotted", linewidth = 1) +
-  geom_line(aes(y = Electirictygro), color = "orange", linetype = "dotdash", linewidth = 1) +
-  labs(title = "Trends Over Time",
-       x = "Years",
-       y = "Values") +
-   scale_y_continuous(labels = scales::comma,  
-                     limits = c(0, 10)) + 
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+#gdp_plot <- ggplot(data = Data_for_R_Project, aes(x = Years)) +
+  #geom_line(aes(y = GDPgro), color = "blue", linetype = "solid", linewidth = 1) +
+  #geom_line(aes(y = Popgro), color = "red", linetype = "dashed", linewidth = 1) +
+  #geom_line(aes(y = Invgro), color = "green", linetype = "dotted", linewidth = 1) +
+  #geom_line(aes(y = Electirictygro), color = "orange", linetype = "dotdash", linewidth = 1) +
+  #labs(title = "Trends Over Time",
+       #x = "Years",
+       #y = "Values") +
+   #scale_y_continuous(labels = scales::comma,  
+                     #limits = c(0, 10)) + 
+  #theme_minimal() +
+  #theme(axis.text.x = element_text(angle = 45, hjust = 1))
 # Print the plot
 # Print the plot
-print(gdp_plot) +
-  geom_line(aes(y = GDPgro), color = "blue", linetype = "solid", size = 1) +
-  geom_line(aes(y = Popgro), color = "red", linetype = "dashed", size = 1) +
-  geom_line(aes(y = Invgro), color = "green", linetype = "dotted", size = 1) +
-  geom_line(aes(y = Electirictygro), color = "orange", linetype = "dotdash", size = 1) +
-  labs(title = "Trends Over Time",
-       x = "Years",
-       y = "Values") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-
-
-
+#print(gdp_plot) +
+  #geom_line(aes(y = GDPgro), color = "blue", linetype = "solid", size = 1) +
+  #geom_line(aes(y = Popgro), color = "red", linetype = "dashed", size = 1) +
+  #geom_line(aes(y = Invgro), color = "green", linetype = "dotted", size = 1) +
+  #geom_line(aes(y = Electirictygro), color = "orange", linetype = "dotdash", size = 1) +
+  #labs(title = "Trends Over Time",
+      # x = "Years",
+      # y = "Values") +
+  #theme_minimal() +
+  #theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 ```
 
