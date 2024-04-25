@@ -152,17 +152,12 @@ The hypothesis underlying this research is that an increase in electrcity consum
 
 
 \newpage
-## Time Series Analysis
+## Visualize
 ```{r}
 setwd("~/Chen_Onal_Oo_Wu/Data/Processed")
 data <- read_excel("Data_for_R_Project.xlsx")
 str(data)
 data$Years <- as.Date(data$Years)
-ts_data <- ts(data$GDPgro, start = min(1999), end = max(2022), frequency = 1)
-plot(ts_data, main = "GDP Growth Over Time", xlab = "Years", ylab = "GDP Growth")
-plot(ts_data, main = "Investment Growth Over Time", xlab = "Years", ylab = "Investment growth")
-plot(ts_data, main = "Population Growth Over Time", xlab = "Years", ylab = "Population growth")
-plot(ts_data, main = "Electrcity Consumption Growth Over Time", xlab = "Years", ylab = "Electrcity consumption growth")
 
 install.packages("Rmisc")
 library(Rmisc)
@@ -201,7 +196,42 @@ ggplot(data, aes(x = Popgro, y = Electirictygro)) +
 
 # Create the plot using ggplot2
 ggplot(data, aes(x = Invgro, y = Popgro)) +
-  geom_line(color = "purple") 
+  geom_line(color = "purple")
+
+ggplot(data, aes(Years)) + 
+  geom_line(aes(y = Invgro, colour = "red")) + 
+  geom_line(aes(y = Popgro, colour = "blue")) +
+  geom_line(aes(y = Electirictygro, colour = "green"))+
+          ylab('Values')+xlab('date')
+ 
+
+```
+## Time Series Analysis
+```{r}
+
+# creating time series for GDP data
+ts_GDPdata <- ts(data$GDPgro, start = min(1999), end = max(2022), frequency = 24)
+
+# creating time series for Investment data
+ts_Invdata <- ts(data$Invgro, start = min(1999), end = max(2022), frequency = 24)
+
+# creating time series for Populaton data
+ts_Popdata <- ts(data$Popgro, start = min(1999), end = max(2022), frequency = 24)
+
+# creating time series for Electricity data
+ts_Elecdata <- ts(data$Electirictygro, start = min(1999), end = max(2022), frequency = 24)
+
+# Decomposing the time series
+ts_GDPdata.decomp <- stl(ts_GDPdata, s.window = "periodic")
+plot(ts_GDPdata.decomp)
+ts_Invdata.decomp <- stl(ts_Invdata, s.window = "periodic")
+plot(ts_Invdata.decomp)
+ts_Popdata.decomp <- stl(ts_Popdata, s.window = "periodic")
+plot(ts_Popdata.decomp)
+ts_Elecdata.decomp <- stl(ts_Elecdata, s.window = "periodic")
+plot(ts_Elecdata.decomp)
+
+
 
 ```
 # Analysis
