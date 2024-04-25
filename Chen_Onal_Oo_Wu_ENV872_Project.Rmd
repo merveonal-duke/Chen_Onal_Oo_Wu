@@ -32,7 +32,7 @@ theme_set(theme_minimal())
 
 ```
 
-```{r, message = FALSE}
+```{r message=FALSE}
 
 # Here is the list of file names to import
 #file_names <- c(
@@ -324,3 +324,122 @@ Has electrcity consumption contributed to GDP growth during the period from 1999
 
 # References
 <add references here if relevant, otherwise delete this section> 
+
+
+###Siyao's Analysis
+
+## Question1:
+How are GDP growth, population growth, investment growth, and electricity consumption interrelated in Turkiye from 1999 to 2022?
+
+#Background:
+This analysis aims to explore the interdependencies between critical economic indicators that influence Turkiye's economic landscape over a significant period. By examining the correlations among these variables, we seek to understand how each one potentially impacts or correlates with the others, particularly in terms of GDP growth.
+
+#Significance:
+Understanding the relationships between these economic indicators is essential for developing informed economic policies and investment strategies. By identifying the strength and direction of these relationships, policymakers and economists can better predict future trends and make decisions that aim to foster economic stability and growth.
+
+#Theoratical Context:
+The hypothesis for this analysis posits that significant correlations exist between GDP growth and other key economic indicators like population growth, investment growth, and electricity consumption. This correlation analysis will help verify the interconnectedness of these variables, supporting or refuting prevailing economic theories regarding their interactions.
+
+#Exploratory Analysis 
+```{r}
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+
+if (!require("readxl")) install.packages("readxl", dependencies = TRUE)
+if (!require("corrplot")) install.packages("corrplot", dependencies = TRUE)
+
+library(readxl)
+library(corrplot)
+
+data_path <- "/Users/chensiyao/Desktop/R/Final Project/Final Project_Env/Data/Raw/Data for R Project.xlsx"
+
+if (file.exists(data_path)) {
+  data <- read_excel(data_path)
+  growth_data <- data[, c("GDPgro", "Popgro", "Invgro", "Electirictygro")]
+  correlation_matrix <- cor(growth_data, use = "complete.obs")
+  
+  corrplot(correlation_matrix, method = "color", addCoef.col = "black",
+           tl.col = "black", tl.srt = 45, cl.pos = "b", type = "upper",
+           title = "Correlation Matrix of Growth Metrics")
+  
+  print(correlation_matrix)
+} else {
+  print("The file 'Data for R Project.xlsx' does not exist at the path specified.")
+}
+```
+#Conlusion for Question1:
+The heatmap displays the correlation coefficients between GDP growth, population growth, investment growth, and electricity consumption growth in Turkiye. Dark blue indicates strong positive correlations, dark red signifies strong negative correlations, and lighter shades denote weaker relationships. Notably, investment growth and electricity consumption exhibit a strong positive correlation with GDP growth, while population growth shows a negligible relationship. This visual suggests that investment and electricity consumption are closely tied to economic performance.
+
+
+
+## Question2:
+Is there a quantifiable impact of electricity consumption on GDP growth in Turkiye, when considering the effects of investment and population growth?
+
+#Background:
+Examination of Turkiye's economic growth by scrutinizing the interactions between GDP growth and key growth indicators: population, investment, and electricity consumption. This analysis aims to illuminate the intertwined influences of these variables from 1999 to 2022.
+
+#Significance:
+Grasping the dynamics between electricity consumption and GDP growth is essential. It underpins strategies for economic stability and advancement, reinforcing the findings by Kasperowicz (2014) on the importance of electricity in bolstering economic development.
+
+#Theoratical Context:
+he hypothesis central to this analysis posits that rising electricity consumption is a catalyst for GDP growth. This supposition is anchored in the rationale that investment, demographic changes, and energy consumption collectively articulate the narrative of GDP growth.
+
+#Exploratory Analysis 
+```{r}
+library(ggplot2)
+
+# Perform linear regression of GDP growth on the other growth metrics
+lm_model <- lm(GDPgro ~ Popgro + Invgro + Electirictygro, data=data)
+
+residuals <- resid(lm_model)
+fitted <- fitted(lm_model)
+std_residuals <- rstandard(lm_model)
+sqrt_std_residuals <- sqrt(abs(std_residuals))
+leverage <- hatvalues(lm_model)
+
+# Create a data frame for plotting
+diagnostic_data <- data.frame(Fitted=fitted, Residuals=residuals, 
+                              Standardized_Residuals=std_residuals, 
+                              Sqrt_Standardized_Residuals=sqrt_std_residuals, 
+                              Leverage=leverage)
+
+
+# Residuals vs Fitted plot
+ggplot(diagnostic_data, aes(x = Fitted, y = Residuals)) +
+  geom_hline(yintercept = 0, color = "red", linetype = "dashed") +
+  geom_point() +
+  geom_smooth(method = "loess", se = FALSE, color = "blue") +
+  labs(title = "Residuals vs Fitted", x = "Fitted Values", y = "Residuals") +
+  theme_minimal()
+
+# Normal Q-Q plot
+qq_data <- data.frame(Theoretical_Quantiles=qqnorm(residuals)$x, Standardized_Residuals=qqnorm(residuals)$y)
+ggplot(qq_data, aes(x = Theoretical_Quantiles, y = Standardized_Residuals)) +
+  geom_point() +
+  geom_abline(intercept = mean(std_residuals), slope = sd(std_residuals), color = "blue", linetype = "dashed") +
+  labs(title = "Normal Q-Q Plot", x = "Theoretical Quantiles", y = "Standardized Residuals") +
+  theme_minimal()
+
+# Scale-Location plot
+ggplot(diagnostic_data, aes(x = Fitted, y = Sqrt_Standardized_Residuals)) +
+  geom_point() +
+  geom_smooth(method = "loess", se = FALSE, color = "blue") +
+  labs(title = "Scale-Location Plot", x = "Fitted Values", y = "Square Root of Standardized Residuals") +
+  theme_minimal()
+
+# Residuals vs Leverage plot
+ggplot(diagnostic_data, aes(x = Leverage, y = Standardized_Residuals)) +
+  geom_hline(yintercept = 0, color = "red", linetype = "dashed") +
+  geom_point() +
+  geom_smooth(method = "loess", se = FALSE, color = "blue") +
+  labs(title = "Residuals vs Leverage", x = "Leverage", y = "Standardized Residuals") +
+  theme_minimal()
+}
+```
+#Conclusion for Question2:
+These plots suggest that while the model fits to some degree, there are indications of non-linearity, potential heteroscedasticity, and influential points, all of which could affect the reliability of the regression model. 
+1. Residuals vs Fitted Plot:
+It reveals the residuals' spread against the predicted values (fitted values). The red dashed line at y=0 represents the expectation where residuals would lie if the model's predictions were perfect. The blue line shows a non-linear relationship suggesting the presence of non-linearity in the model.
+2.Normal Q-Q Plot:
+This plot is a graphical technique for determining if two data sets come from populations with a common distribution, in this case, if the residuals are normally distributed. Points deviating from the dashed line indicate departures from normality.
+3.Scale-Location Plot:
+It shows the spread of residuals, allowing us to check the assumption of equal variance (homoscedasticity). It seems that the residuals spread out in a non-constant manner against the fitted values, indicating potential heteroscedasticity.
