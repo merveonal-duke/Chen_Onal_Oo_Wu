@@ -17,6 +17,8 @@ editor_options:
 ---
 ```{r setup, include=FALSE, tidy=TRUE}
 
+#Ye Working on this
+
 #Checking working directory
 getwd()
 
@@ -110,6 +112,8 @@ The hypothesis underlying this research is that an increase in electrcity consum
 
 ## Visualize
 ```{r}
+
+#Merve Working on This
 setwd("~/Chen_Onal_Oo_Wu/Data/Processed")
 data <- read_excel("Data_for_R_Project.xlsx")
 str(data)
@@ -163,6 +167,7 @@ ggplot(data, aes(Years)) +
 
 # Exploratory Analysis 
 ```{r}
+#Merve Working on t his
 setwd("~/Chen_Onal_Oo_Wu/Data/Processed")
 data <- read_excel("Data_for_R_Project.xlsx")
 str(data)
@@ -277,6 +282,7 @@ ggplot(data, aes(Years)) +
 ```
 ## Time Series Analysis
 ```{r}
+#Merve Working On This
 
 # creating time series for GDP data
 ts_GDPdata <- ts(data$GDPgro, start = min(1999), end = max(2022), frequency = 24)
