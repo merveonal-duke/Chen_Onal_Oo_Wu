@@ -381,7 +381,7 @@ Examination of Turkiye's economic growth by scrutinizing the interactions betwee
 Grasping the dynamics between electricity consumption and GDP growth is essential. It underpins strategies for economic stability and advancement, reinforcing the findings by Kasperowicz (2014) on the importance of electricity in bolstering economic development.
 
 #Theoratical Context:
-he hypothesis central to this analysis posits that rising electricity consumption is a catalyst for GDP growth. This supposition is anchored in the rationale that investment, demographic changes, and energy consumption collectively articulate the narrative of GDP growth.
+The hypothesis central to this analysis posits that rising electricity consumption is a catalyst for GDP growth. This supposition is anchored in the rationale that investment, demographic changes, and energy consumption collectively articulate the narrative of GDP growth.
 
 #Exploratory Analysis 
 ```{r}
@@ -443,3 +443,36 @@ It reveals the residuals' spread against the predicted values (fitted values). T
 This plot is a graphical technique for determining if two data sets come from populations with a common distribution, in this case, if the residuals are normally distributed. Points deviating from the dashed line indicate departures from normality.
 3.Scale-Location Plot:
 It shows the spread of residuals, allowing us to check the assumption of equal variance (homoscedasticity). It seems that the residuals spread out in a non-constant manner against the fitted values, indicating potential heteroscedasticity.
+
+#Question3:
+In assessing the relationship between electricity consumption and GDP growth, how might outliers influence the regression model's results?
+
+#Background:
+Conduct an outlier analysis to identify data points that disproportionately influence the model's predictions.
+
+#Significance:
+By identifying and addressing outliers, we improve the model's accuracy and reliability, providing a sound basis for economic insights and decisions.
+
+#Theoratical Context:
+Our analysis is based on the assumption that while most data points conform to a general trend, some may deviate due to various factors. Cook's distance is a measure used to identify these influential outliers within the regression context.
+
+#Exploratory Analysis 
+```{r}
+# Calculate Cook's distance for the model
+cooks.distance <- cooks.distance(lm_model)
+
+# Identify potential outliers (common threshold is 4/(n-k-1), where n is the number of observations and k is the number of predictors)
+threshold <- 4 / (length(cooks.distance) - length(coef(lm_model)) - 1)
+potential_outliers <- which(cooks.distance > threshold)
+
+# Summary of potential outliers
+print(potential_outliers)
+
+# Plot to visualize potential outliers
+plot(cooks.distance, pch="*", cex=2, main="Cook's Distance Plot")
+abline(h = threshold, col = "red", lwd = 2, lty = 2)
+}
+```
+
+#Conclusion for Question3:
+ In this plot, while most points are within acceptable bounds, a few points significantly exceed the threshold, indicating they are outliers with substantial influence on the model. These should be investigated further to determine if they are anomalies or if they represent a valid but rare variation within the data. The conclusion is that the identified influential points merit closer examination to ensure the robustness and validity of the regression analysis.
