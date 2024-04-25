@@ -325,7 +325,6 @@ Has electrcity consumption contributed to GDP growth during the period from 1999
 # References
 <add references here if relevant, otherwise delete this section> 
 
-
 ###Siyao's Analysis
 
 ## Question1:
@@ -476,3 +475,6 @@ abline(h = threshold, col = "red", lwd = 2, lty = 2)
 
 #Conclusion for Question3:
  In this plot, while most points are within acceptable bounds, a few points significantly exceed the threshold, indicating they are outliers with substantial influence on the model. These should be investigated further to determine if they are anomalies or if they represent a valid but rare variation within the data. The conclusion is that the identified influential points merit closer examination to ensure the robustness and validity of the regression analysis.
+
+
+
