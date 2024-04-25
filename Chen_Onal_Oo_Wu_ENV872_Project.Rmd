@@ -17,6 +17,8 @@ editor_options:
 ---
 ```{r setup, include=FALSE, tidy=TRUE}
 
+#Ye Working on this
+
 #Checking working directory
 getwd()
 
@@ -110,6 +112,8 @@ The hypothesis underlying this research is that an increase in electrcity consum
 
 ## Visualize
 ```{r}
+
+#Merve Working on This
 setwd("~/Chen_Onal_Oo_Wu/Data/Processed")
 data <- read_excel("Data_for_R_Project.xlsx")
 str(data)
@@ -163,6 +167,7 @@ ggplot(data, aes(Years)) +
 
 # Exploratory Analysis 
 ```{r}
+#Merve Working on t his
 setwd("~/Chen_Onal_Oo_Wu/Data/Processed")
 data <- read_excel("Data_for_R_Project.xlsx")
 str(data)
@@ -277,6 +282,7 @@ ggplot(data, aes(Years)) +
 ```
 ## Time Series Analysis
 ```{r}
+#Merve Working On This
 
 # creating time series for GDP data
 ts_GDPdata <- ts(data$GDPgro, start = min(1999), end = max(2022), frequency = 24)
@@ -308,16 +314,24 @@ plot(ts_Elecdata.decomp)
 
 
 ## Question 1: <insert specific question here and add additional subsections for additional questions below, if needed>
-Has electrcity consumption contributed to GDP growth during the period from 1999 to 2022 in Turkiye?
+Has electrcity consumption increased with GDP growth during the period from 1999 to 2022 in Turkiye?
 
 ## Question 2: 
-
-
+Have electrcity consumption increased with investment and population growth during the period from 1999 to 2022 in Turkiye?
 
 
 \newpage
 
 # Summary and Conclusions
+When examining the decomposed data, it is evident that yearly data do not exhibit seasonality. The graphs depicting GDP growth, investment growth, population growth, and electricity consumption growth do not display any upward or downward trends; instead, the data shows a horizontal and stationary pattern
+Positive relationships:
+ There is a positive relationship between investment growth and GDP growth. 
+ There is a positive relationship between GDP growth and electricity consumption growth. 
+ There is a positive relationship between investment growth and electricity consumption growth. 
+No clear relationships:
+ There is no clear relationship between population and GDP growth. 
+ There is no clear relationship between population and electricity consumption growth. 
+ There is no clear relationship between population and investment growth. 
 
 
 \newpage
