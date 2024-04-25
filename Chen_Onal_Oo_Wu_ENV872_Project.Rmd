@@ -28,6 +28,7 @@ library(trend); library(ggplot2); library(ggthemes);
 library(readxl); library(here); library(dplyr);
 
 #importing dataset
+data <- read_excel("./Data/Raw/Data_for_R_Project.xlsx")
 
 #setting theme
 theme_set(theme_minimal())
