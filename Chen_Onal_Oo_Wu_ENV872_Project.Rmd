@@ -25,11 +25,11 @@ library(trend); library(ggplot2); library(ggthemes);
 library(readxl); library(here); library(dplyr);
 
 #Checking working directory
-setwd("Data/Processed")
+#setwd("./Data/Processed")
 getwd()
 
 #importing dataset
-data <- read_excel("Data_for_R_Project.xlsx")
+data <- read_excel("./Data/Processed/Data_for_R_Project.xlsx")
 
 #setting theme
 ye_theme <- theme_economist_white(base_size = 14) +
@@ -51,24 +51,9 @@ siyao_theme <- theme_wsj(base_size = 14) +
 ```
 
 
-```{r}
-# Here I create a sequence of dates from 1999 to 2022
-# Define the start and end years
-#start_year <- 1999
-#end_year <- 2022
-
-# Create a sequence of years from start_year to end_year
-#year_sequence <- seq(start_year, end_year, by = 1)
-
-# Print the sequence of years
-#year_sequence
-
-
-```
-
 # Rationale and Research Questions
 
-Does electricity consumption increase the GDP growth 
+How does GDP growth relate to investment growth, capital accumulation and population growth in Turkiye from 1999-2022 period? Does electricity consumption have any relationship with GDP, investment and population? 
 
 ## Background
 
