@@ -278,13 +278,14 @@ if (!require("corrplot")) install.packages("corrplot", dependencies = TRUE)
 library(readxl)
 library(corrplot)
 
+#Siyao, we can't use the following data_path for everyone else.
 data_path <- "/Users/chensiyao/Desktop/R/Final Project/Final Project_Env/Data/Raw/Data for R Project.xlsx"
 
 if (file.exists(data_path)) {
   data <- read_excel(data_path)
   growth_data <- data[, c("GDPgro", "Popgro", "Invgro", "Electricitygro")]
   correlation_matrix <- cor(growth_data, use = "complete.obs")
-  
+  #only corrpplot part is needed here. We don't need to specify other parts.
   corrplot(correlation_matrix, method = "color", addCoef.col = "black",
            tl.col = "black", tl.srt = 45, cl.pos = "b", type = "upper",
            title = "Correlation Matrix of Growth Metrics")
@@ -313,7 +314,7 @@ The hypothesis central to this analysis posits that rising electricity consumpti
 
 #Exploratory Analysis 
 ```{r}
-library(ggplot2)
+#library(ggplot2)
 
 # Perform linear regression of GDP growth on the other growth metrics
 lm_model <- lm(GDPgro ~ Popgro + Invgro + Electricitygro, data=data)
