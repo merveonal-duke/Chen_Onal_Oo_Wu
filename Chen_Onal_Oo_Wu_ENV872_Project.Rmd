@@ -115,13 +115,15 @@ ggplot(data, aes(x = Popgro, y = Electricitygro)) +
 # Create the plot using ggplot2
 ggplot(data, aes(x = Invgro, y = Popgro)) +
   geom_line(color = "purple")
-ggplot(data, aes(Years)) + 
-  geom_line(aes(y = Invgro, colour = "red")) + 
-  geom_line(aes(y = Popgro, colour = "blue")) +
-  geom_line(aes(y = Electricitygro, colour = "green"))+
-          ylab('Values')+xlab('date')
- 
 
+# Create the plot using ggplot2 in one graph
+ggplot(data, aes(x = Years)) + 
+  geom_line(aes(y = Invgro, colour = "Investment")) + 
+  geom_line(aes(y = Popgro, colour = "Population")) +
+  geom_line(aes(y = Electricitygro, colour = "Electricity")) +
+  scale_x_continuous(breaks = seq(1999, 2022, by = 2)) +
+  ylab("Values") +
+  xlab("Year")
 ```
 
 >Explanation: From the plot, we notice a slightly decreasing trend throughout the 24 years period from 1999 to 2022. Furthermore, we also can notice 
@@ -182,8 +184,49 @@ plot(ts_Elecdata.decomp)
 
 ```
 # Analysis
+### NOT SURE ABOUT THIS PART TEAM
+```{r}
+install.packages("corrplot")
+library(corrplot)
+library(forecast)
+install.packages("package_name")
 
+ts_GDPdata.decomp <- decompose(ts_GDPdata)
+plot(ts_GDPdata.decomp)
+# Extract trend component
+trend_GDP <- ts_GDPdata.decomp$trend
+plot(trend_GDP)
+# Extract seasonal component
+seasonal_GDP <- ts_GDPdata.decomp$seasonal
+plot(seasonal_GDP)
+# ACF plot
+acf(ts_GDPdata)
 
+# Compute correlation matrix
+correlation_matrix <- cor(data[, c("GDPgro", "Invgro", "Popgro", "Electricitygro")])
+
+# Visualize correlation matrix
+corrplot(correlation_matrix, method = "circle")
+
+# Plot time series
+plot(ts_GDPdata, main = "GDP Growth Over Time", xlab = "Year", ylab = "GDP Growth")
+lines(ts_Invdata, col = "blue")
+lines(ts_Popdata, col = "red")
+lines(ts_Elecdata, col = "green")
+legend("topright", legend = c("GDP Growth", "Investment Growth", "Population Growth", "Electricity Growth"), col = c("black", "blue", "red", "green"), lty = 1)
+
+# Arima
+arima_model_GDP <- auto.arima(ts_GDPdata)
+print(summary(arima_model_GDP))
+
+# Model diagnostics
+checkresiduals(arima_model_GDP)
+
+# Forecasting
+forecast_values_GDP <- forecast(arima_model_GDP, h = 5)  # Forecasting 5 future periods
+plot(forecast_values_GDP, main = "Forecast for GDP Growth Time Series")
+
+```
 
 ## Question 1: <insert specific question here and add additional subsections for additional questions below, if needed>
 Has electricity consumption increased with GDP growth during the period from 1999 to 2022 in Turkiye?
@@ -199,9 +242,9 @@ When examining the decomposed data, it is evident that yearly data do not exhibi
 Positive relationships:
  There is a positive relationship between investment growth and GDP growth. 
  There is a positive relationship between GDP growth and electricity consumption growth. 
- There is a positive relationship between investment growth and electricity consumption growth. 
+ There is a positive relationship between investment growth and electricity consumption growth.
+ There is a negative relationship between population and GDP growth. 
 No clear relationships:
- There is no clear relationship between population and GDP growth. 
  There is no clear relationship between population and electricity consumption growth. 
  There is no clear relationship between population and investment growth. 
 
@@ -239,7 +282,6 @@ data_path <- "/Users/chensiyao/Desktop/R/Final Project/Final Project_Env/Data/Ra
 
 if (file.exists(data_path)) {
   data <- read_excel(data_path)
-  #you don't need the above lines
   growth_data <- data[, c("GDPgro", "Popgro", "Invgro", "Electricitygro")]
   correlation_matrix <- cor(growth_data, use = "complete.obs")
   
@@ -322,8 +364,6 @@ ggplot(diagnostic_data, aes(x = Leverage, y = Standardized_Residuals)) +
 
 ```
 #Conclusion for Question2:
-#the followings sound like generic chat gpt answers. Need to modify into our context.
-
 These plots suggest that while the model fits to some degree, there are indications of non-linearity, potential heteroscedasticity, and influential points, all of which could affect the reliability of the regression model. 
 1. Residuals vs Fitted Plot:
 It reveals the residuals' spread against the predicted values (fitted values). The red dashed line at y=0 represents the expectation where residuals would lie if the model's predictions were perfect. The blue line shows a non-linear relationship suggesting the presence of non-linearity in the model.
