@@ -3,7 +3,8 @@ Readme
 # Chen_Onal_Oo_Wu_ENV872_Project
 ## Summary
 
-This study aims to understand the relationship between electricity consumption and GDP growth in Turkiye. 
+This study aims to understand the relationship between GDP growth and electricity consumption, investment, population growth  during the period from 1999 to 2022 in Turkiye?
+
 
 ## Investigators
 
