@@ -239,6 +239,7 @@ data_path <- "/Users/chensiyao/Desktop/R/Final Project/Final Project_Env/Data/Ra
 
 if (file.exists(data_path)) {
   data <- read_excel(data_path)
+  #you don't need the above lines
   growth_data <- data[, c("GDPgro", "Popgro", "Invgro", "Electricitygro")]
   correlation_matrix <- cor(growth_data, use = "complete.obs")
   
@@ -321,6 +322,7 @@ ggplot(diagnostic_data, aes(x = Leverage, y = Standardized_Residuals)) +
 
 ```
 #Conclusion for Question2:
+#the followings sound like generic chat gpt answers. Need to modify into our context.
 These plots suggest that while the model fits to some degree, there are indications of non-linearity, potential heteroscedasticity, and influential points, all of which could affect the reliability of the regression model. 
 1. Residuals vs Fitted Plot:
 It reveals the residuals' spread against the predicted values (fitted values). The red dashed line at y=0 represents the expectation where residuals would lie if the model's predictions were perfect. The blue line shows a non-linear relationship suggesting the presence of non-linearity in the model.
