@@ -17,9 +17,13 @@ editor_options:
 ---
 ```{r setup, include=FALSE, tidy=TRUE, error=FALSE}
 
-#Ye Working on this
+#Fei Working on this
+#Installing packages 
+install.packages("corrplot")
+install.packages("package_name")
 
 #Loading packages
+library(corrplot);library(forecast);
 library(tidyverse); library(lubridate);library(zoo);
 library(trend); library(ggplot2); library(ggthemes);
 library(readxl); library(here); library(dplyr); library(Rmisc)
@@ -77,23 +81,11 @@ The hypothesis underlying this research is that an increase in electricity consu
 ## Visualize
 ```{r trendline, tidy=TRUE, error=FALSE}
 
-#Merve Working on This. YKO doesn't know how to interpret these graphs. Need to ask Merve
-
-#setwd("~/Chen_Onal_Oo_Wu/Data/Processed")
-#data <- read_excel("Data_for_R_Project.xlsx")
-#str(data)
-#data$Years <- as.Date(data$Years)
-#install.packages("Rmisc")
-#library(Rmisc)
-
 # Function to create time series plot with custom title and axis labels
 create_ts_plot <- function(data, variable_name, main_title, xlab_title, ylab_title) {
   plot(data, main = main_title, xlab = xlab_title, ylab = ylab_title)
 }
-  # Remove rows with missing values in any of the columns
-  #data <- na.omit(data)
-  
-#library(ggplot2)
+ 
 # Assuming you have a data frame named 'my_data' containing columns 'Invgro', 'GDPgro', and 'Popgro'
 
 # Create the plot using ggplot2
@@ -148,30 +140,9 @@ In the sixth plot, Investment growth is represented on the x-axis, and Populatio
 In the seventh plot, Investment growth, Population growth, and Electricity consumption growth are represented from 1999 to 2022. Population changes are smooth and stable, while electricity consumption changes occur within a short range. Investment growth fluctuates widely and is far from being stable from year to year.
  
 
-# Dataset Information
-
-
-
 \newpage
-
-# Exploratory Analysis 
-```{r time.series, tidy=TRUE, error=FALSE}
-
-#Merve Working on t his
-#setwd("~/Chen_Onal_Oo_Wu/Data/Processed")
-#data <- read_excel("Data_for_R_Project.xlsx")
-#str(data)
-#data$Years <- as.Date(data$Years)
-
-
-
-```
-\newpage
- 
-
 ## Time Series Analysis
-```{r}
-#Merve Working On This
+```{r time.series, tidy=TRUE, error=FALSE}
 
 # creating time series for GDP data
 ts_GDPdata <- ts(data$GDPgro, start = min(1999), end = max(2022), frequency = 24)
@@ -197,12 +168,14 @@ plot(ts_Elecdata.decomp)
 
 #The following graphs should be the first graph for exploring the trend. But I'm not sure if this is time series.
 
-plot(ts_data, main = "GDP Growth Over Time", xlab = "Years", ylab = "GDP Growth")
-plot(ts_data, main = "Investment Growth Over Time", xlab = "Years", ylab = "Investment growth")
-plot(ts_data, main = "Population Growth Over Time", xlab = "Years", ylab = "Population growth")
-plot(ts_data, main = "Electricity Consumption Growth Over Time", xlab = "Years", ylab = "electricity consumption growth")
+#Ye please fix this:
+#plot(ts_GDPdata.decomp, main = "GDP Growth Over Time", xlab = "Years", ylab = "GDP Growth")
+#plot(ts_Invdata.decomp, main = "Investment Growth Over Time", xlab = "Years", ylab = "Investment growth")
+#plot(ts_Popdata.decomp, main = "Population Growth Over Time", xlab = "Years", ylab = "Population growth")
+#plot(ts_Elecdata.decomp, main = "Electricity Consumption Growth Over Time", xlab = "Years", ylab = "electricity consumption growth")
 
 ```
+##we need to move it to somewhere else later
 >Explanation: In the first plot, decomposed GDP growth data is presented. The data does not exhibit seasonality due to its yearly nature, and there is also no discernible upward or downward trend. However, following the Covid-19 pandemic, the shock creates outlier effects on the data.
 In the second plot, decomposed Investment growth data is presented. The data does not exhibit seasonality due to its yearly nature, and there is also no discernible upward or downward trend. However, following the Covid-19 pandemic, the shock creates outlier effects on the data.
 In the third plot, decomposed Population growth data is presented. The data does not exhibit seasonality due to its yearly nature, and there is also no discernible upward or downward trend. However, following the Covid-19 pandemic, the shock creates outlier effects on the data.
@@ -216,10 +189,7 @@ In the seventh plot, Electricity consumption growth time series data is presente
 # Analysis
 ### NOT SURE ABOUT THIS PART TEAM
 ```{r}
-install.packages("corrplot")
-library(corrplot)
-library(forecast)
-install.packages("package_name")
+
 
 ts_GDPdata.decomp <- decompose(ts_GDPdata)
 plot(ts_GDPdata.decomp)
@@ -280,6 +250,8 @@ No clear relationships:
 
 ## Question1:
 How are GDP growth, population growth, investment growth, and electricity consumption interrelated in Turkiye from 1999 to 2022?
+
+##Fei can move this to upper background info
 
 #Background:
 This analysis aims to explore the interdependencies between critical economic indicators that influence Turkiye's economic landscape over a significant period. By examining the correlations among these variables, we seek to understand how each one potentially impacts or correlates with the others, particularly in terms of GDP growth.
