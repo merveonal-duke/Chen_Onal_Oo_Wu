@@ -219,7 +219,7 @@ legend("topright", legend = c("GDP Growth", "Investment Growth", "Population Gro
 
 
 ```
-
+#we need to move those to the first part 
 ## Question 1: <insert specific question here and add additional subsections for additional questions below, if needed>
 Has electricity consumption increased with GDP growth during the period from 1999 to 2022 in Turkiye?
 
@@ -258,36 +258,19 @@ This analysis aims to explore the interdependencies between critical economic in
 
 #Significance:
 Understanding the relationships between these economic indicators is essential for developing informed economic policies and investment strategies. By identifying the strength and direction of these relationships, policymakers and economists can better predict future trends and make decisions that aim to foster economic stability and growth.
-
+#combine those to the first 
 #Theoratical Context:
 The hypothesis for this analysis posits that significant correlations exist between GDP growth and other key economic indicators like population growth, investment growth, and electricity consumption. This correlation analysis will help verify the interconnectedness of these variables, supporting or refuting prevailing economic theories regarding their interactions.
 
 #Exploratory Analysis 
-```{r}
-options(repos = c(CRAN = "https://cloud.r-project.org"))
+```{r regression analysis, tidy=TRUE, error=FALSE}
 
-if (!require("readxl")) install.packages("readxl", dependencies = TRUE)
-if (!require("corrplot")) install.packages("corrplot", dependencies = TRUE)
-
-library(readxl)
-library(corrplot)
-
-#Siyao, we can't use the following data_path for everyone else.
-data_path <- "/Users/chensiyao/Desktop/R/Final Project/Final Project_Env/Data/Raw/Data for R Project.xlsx"
-
-if (file.exists(data_path)) {
-  data <- read_excel(data_path)
   growth_data <- data[, c("GDPgro", "Popgro", "Invgro", "Electricitygro")]
   correlation_matrix <- cor(growth_data, use = "complete.obs")
   #only corrpplot part is needed here. We don't need to specify other parts.
   corrplot(correlation_matrix, method = "color", addCoef.col = "black",
            tl.col = "black", tl.srt = 45, cl.pos = "b", type = "upper",
            title = "Correlation Matrix of Growth Metrics")
-  
-  print(correlation_matrix)
-} else {
-  print("The file 'Data for R Project.xlsx' does not exist at the path specified.")
-}
 ```
 #Conlusion for Question1:
 The heatmap displays the correlation coefficients between GDP growth, population growth, investment growth, and electricity consumption growth in Turkiye. Dark blue indicates strong positive correlations, dark red signifies strong negative correlations, and lighter shades denote weaker relationships. Notably, investment growth and electricity consumption exhibit a strong positive correlation with GDP growth, while population growth shows a negligible relationship. This visual suggests that investment and electricity consumption are closely tied to economic performance.
@@ -308,7 +291,6 @@ The hypothesis central to this analysis posits that rising electricity consumpti
 
 #Exploratory Analysis 
 ```{r}
-#library(ggplot2)
 
 # Perform linear regression of GDP growth on the other growth metrics
 lm_model <- lm(GDPgro ~ Popgro + Invgro + Electricitygro, data=data)
@@ -367,7 +349,7 @@ This plot is a graphical technique for determining if two data sets come from po
 3.Scale-Location Plot:
 It shows the spread of residuals, allowing us to check the assumption of equal variance (homoscedasticity). It seems that the residuals spread out in a non-constant manner against the fitted values, indicating potential heteroscedasticity.
 
-#Question3:
+#Question3:Ye please review this
 In assessing the relationship between electricity consumption and GDP growth, how might outliers influence the regression model's results?
 
 #Background:
