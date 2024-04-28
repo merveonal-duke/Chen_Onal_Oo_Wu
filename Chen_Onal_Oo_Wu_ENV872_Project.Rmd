@@ -129,6 +129,12 @@ ggplot(data, aes(x = Years)) +
   ylab("Values") +
   xlab("Year")
 
+# Compute correlation matrix
+correlation_matrix <- cor(data[, c("GDPgro", "Invgro", "Popgro", "Electricitygro")])
+
+# Visualize correlation matrix
+corrplot(correlation_matrix, method = "circle")
+
 ```
 
 >Explanation: In the first plot, GDP growth is represented on the x-axis, and Investment growth is represented on the y-axis. There appears to be a positive relationship between the two variables; higher investments correspond to higher GDP growth.
@@ -138,7 +144,7 @@ In the fourth plot, Investment growth is represented on the x-axis, and Electric
 In the fifth plot, population growth is represented on the x-axis, and Electricity consumption is represented on the y-axis. There appears not to be a positive relationship between the two variables.
 In the sixth plot, Investment growth is represented on the x-axis, and Population growth is represented on the y-axis. There appears not to be a significant relationship between the two variables.
 In the seventh plot, Investment growth, Population growth, and Electricity consumption growth are represented from 1999 to 2022. Population changes are smooth and stable, while electricity consumption changes occur within a short range. Investment growth fluctuates widely and is far from being stable from year to year.
- 
+In the eight plot, a graphical representation of a correlation matrix using circles or ellipses. The size of each circle represents the magnitude of the correlation coefficient between two variables. Larger circles indicate stronger correlations, while smaller circles indicate weaker correlations. The color of each circle represents the sign of the correlation coefficient. Red shows positive correlations and blue shows negative correlation. There is a strong and positive raltionship between GDP growth, investment growth and electricity consumption growth. There is no positive relationship between population and Gdp growth as Solow-Swan model claimed. There is also no relationship between population growth-ivestment and population-electricity consumption.
 
 \newpage
 ## Time Series Analysis
@@ -202,11 +208,6 @@ plot(seasonal_GDP)
 # ACF plot
 acf(ts_GDPdata)
 
-# Compute correlation matrix
-correlation_matrix <- cor(data[, c("GDPgro", "Invgro", "Popgro", "Electricitygro")])
-
-# Visualize correlation matrix
-corrplot(correlation_matrix, method = "circle")
 
 # Plot time series
 plot(ts_GDPdata, main = "GDP Growth Over Time", xlab = "Year", ylab = "GDP Growth")
