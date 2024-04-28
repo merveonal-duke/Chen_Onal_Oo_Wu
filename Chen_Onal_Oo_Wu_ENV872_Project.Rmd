@@ -64,19 +64,21 @@ siyao_theme <- theme_wsj(base_size = 14) +
 
 How does GDP growth relate to investment growth, capital accumulation and population growth in Turkiye from 1999-2022 period? Does electricity consumption have any relationship with GDP, investment and population? 
 
+## Sub-Questions:
+
+Has electricity consumption increased with GDP growth during the period from 1999 to 2022 in Turkiye? Have electricity consumption increased with investment and population growth during the period from 1999 to 2022 in Turkiye?Is there a quantifiable impact of electricity consumption on GDP growth in Turkiye, when considering the effects of investment and population growth?
+
 ## Background
 
-We analyze the effect of investment growth which corresponds to capital accumulation and population growth on the GDP growth of Turkiye for the 1999-2022 period. We also analyze the impact of electricity consumption on the GDP growth.
-We have found a dataset from Turkiye (references) and the data points are stored as log grwoth point.
+We have analyzed the impact of investment growth, population growth and electricity consumption on the GDP growth of Turkiye for the period of 1999-2022. We obtained a dataset from Turkiye and recorded the data points as log growth points. Our aim is to explore the interdependencies between critical economic indicators that influence Turkiye's economic landscape over a significant period. By examining the correlations among these variables, we aim to understand how each one potentially impacts or correlates with the others, particularly in terms of GDP growth. Our analysis seeks to scrutinize the interactions between GDP growth and key growth indicators such as population, investment and electricity consumption to illuminate the intertwined influences of these variables from 1999 to 2022.
 
 ## Significance
 
-Understanding the relationship between electricity consumption and GDP growth is crucial. Understanding the behavior of electricity consumption in relation to the economy is very important for improve to a stable economic growth and development (Kasperowicz, 2014: 46).
-
+Understanding the relationship between electricity consumption and GDP growth is crucial for improving stable economic growth and development. It is important to understand the behavior of electricity consumption in relation to the economy. This understanding is essential for developing informed economic policies and investment strategies. By identifying the strength and direction of these relationships, policymakers and economists can better predict future trends and make decisions that aim to foster economic stability and growth. Grasping the dynamics between electricity consumption and GDP growth is essential for strategies that underpin economic stability and advancement. These findings reinforce the importance of electricity in bolstering economic development, as noted by Kasperowicz (2014).
 
 ## Theoretical Context
 
-The hypothesis underlying this research is that an increase in electricity consumption leads to GDP growth. This hypothesis is grounded in the understanding that investment, population and electricity consumption which explains GDP growth.
+The central hypothesis of this research is that an increase in electricity consumption is linked to GDP growth. This hypothesis is based on the understanding that investment, population, and electricity consumption are key factors that contribute to GDP growth. The hypothesis for this analysis suggests that there are significant correlations between GDP growth and other important economic indicators such as population growth, investment growth, and electricity consumption. By analyzing these correlations, we can verify the interconnectedness of these variables and determine whether they support or refute prevailing economic theories about their interactions. The hypothesis central to this analysis posits that rising electricity consumption acts as a catalyst for GDP growth. This supposition is based on the idea that investment, demographic changes, and energy consumption together help explain the narrative of GDP growth.
 
 ## Visualize
 ```{r trendline, tidy=TRUE, error=FALSE}
@@ -220,12 +222,6 @@ legend("topright", legend = c("GDP Growth", "Investment Growth", "Population Gro
 
 
 ```
-#we need to move those to the first part 
-## Question 1: <insert specific question here and add additional subsections for additional questions below, if needed>
-Has electricity consumption increased with GDP growth during the period from 1999 to 2022 in Turkiye?
-
-## Question 2: 
-Have electricity consumption increased with investment and population growth during the period from 1999 to 2022 in Turkiye?
 
 
 \newpage
@@ -244,24 +240,10 @@ No clear relationships:
 
 \newpage
 
-# References
-<add references here if relevant, otherwise delete this section> 
-
-###Siyao's Analysis
-
 ## Question1:
 How are GDP growth, population growth, investment growth, and electricity consumption interrelated in Turkiye from 1999 to 2022?
 
-##Fei can move this to upper background info
 
-#Background:
-This analysis aims to explore the interdependencies between critical economic indicators that influence Turkiye's economic landscape over a significant period. By examining the correlations among these variables, we seek to understand how each one potentially impacts or correlates with the others, particularly in terms of GDP growth.
-
-#Significance:
-Understanding the relationships between these economic indicators is essential for developing informed economic policies and investment strategies. By identifying the strength and direction of these relationships, policymakers and economists can better predict future trends and make decisions that aim to foster economic stability and growth.
-#combine those to the first 
-#Theoratical Context:
-The hypothesis for this analysis posits that significant correlations exist between GDP growth and other key economic indicators like population growth, investment growth, and electricity consumption. This correlation analysis will help verify the interconnectedness of these variables, supporting or refuting prevailing economic theories regarding their interactions.
 
 #Exploratory Analysis 
 ```{r regression analysis, tidy=TRUE, error=FALSE}
@@ -278,17 +260,7 @@ The heatmap displays the correlation coefficients between GDP growth, population
 
 
 
-## Question2:
-Is there a quantifiable impact of electricity consumption on GDP growth in Turkiye, when considering the effects of investment and population growth?
 
-#Background:
-Examination of Turkiye's economic growth by scrutinizing the interactions between GDP growth and key growth indicators: population, investment, and electricity consumption. This analysis aims to illuminate the intertwined influences of these variables from 1999 to 2022.
-
-#Significance:
-Grasping the dynamics between electricity consumption and GDP growth is essential. It underpins strategies for economic stability and advancement, reinforcing the findings by Kasperowicz (2014) on the importance of electricity in bolstering economic development.
-
-#Theoratical Context:
-The hypothesis central to this analysis posits that rising electricity consumption is a catalyst for GDP growth. This supposition is anchored in the rationale that investment, demographic changes, and energy consumption collectively articulate the narrative of GDP growth.
 
 #Exploratory Analysis 
 ```{r}
