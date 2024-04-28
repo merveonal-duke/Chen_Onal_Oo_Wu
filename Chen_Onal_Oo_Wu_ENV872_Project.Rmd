@@ -353,5 +353,5 @@ abline(h = threshold, col = "red", lwd = 2, lty = 2)
 ```
 
 #Conclusion for Question3:
- In this plot, while most points are within acceptable bounds, a few points significantly exceed the threshold, indicating they are outliers with substantial influence on the model. 
+In this plot, while most points are within acceptable bounds, a few points significantly exceed the threshold, indicating they are outliers with substantial influence on the model. 
  
