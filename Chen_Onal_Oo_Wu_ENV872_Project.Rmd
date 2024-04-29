@@ -17,7 +17,7 @@ editor_options:
 ---
 ```{r setup, include=FALSE, tidy=TRUE, error=FALSE}
 
-#Fei Working on this
+#Fei+Ye
 #Installing packages 
 install.packages("corrplot")
 install.packages("package_name")
@@ -80,47 +80,21 @@ Understanding the relationship between electricity consumption and GDP growth is
 
 The central hypothesis of this research is that an increase in electricity consumption is linked to GDP growth. This hypothesis is based on the understanding that investment, population, and electricity consumption are key factors that contribute to GDP growth. The hypothesis for this analysis suggests that there are significant correlations between GDP growth and other important economic indicators such as population growth, investment growth, and electricity consumption. By analyzing these correlations, we can verify the interconnectedness of these variables and determine whether they support or refute prevailing economic theories about their interactions. The hypothesis central to this analysis posits that rising electricity consumption acts as a catalyst for GDP growth. This supposition is based on the idea that investment, demographic changes, and energy consumption together help explain the narrative of GDP growth.
 
-## Visualize
-```{r trendline, tidy=TRUE, error=FALSE}
+## Dataset Information
+This analysis uses three databases: (https://ytbsbilgi.teias.gov.tr/ytbsbilgi/frm_istatistikler.jsf) for electricity consumption; (https://data.tuik.gov.tr/Kategori/GetKategori?p=ulusal-hesaplar-113&dil=2) for GDP growth rate; (https://databank.worldbank.org/source/world-development-indicators) for investment and population growth. The Solow–Swan model or exogenous growth model is an economic model of long-run economic growth. It attempts to explain long-run economic growth by looking at capital accumulation, labor or population growth, and productivity increases largely driven by technological progress. In our analysis, parallel with Solow-Swan model we assume that the production function takes the following form: Y = aKbL1-b where 0 < b < 1. The production function is known as the Cobb-Douglas Production function, which is the most widely used neoclassical production function. We analyze the effect of investment growth which corresponds to capital accumulation and population growth on the GDP growth of Turkiye for the 1999-2022 period. We also analyze the impact of electricity consumption on the GDP growth. For details of each database, please refer to the files in the Metadata folder under the Data folder.
 
+# Exploratory Analysis
+
+```{r trendline, tidy=TRUE, error=FALSE, echo=FALSE}
+
+# Merve + Fei
 # Function to create time series plot with custom title and axis labels
 create_ts_plot <- function(data, variable_name, main_title, xlab_title, ylab_title) {
   plot(data, main = main_title, xlab = xlab_title, ylab = ylab_title)
 }
  
-# Assuming you have a data frame named 'my_data' containing columns 'Invgro', 'GDPgro', and 'Popgro'
+#First, we will explore what has been going on in Turkiye in terms of investment growth, population growth and electricity consumption growth
 
-# Create the plot using ggplot2
-ggplot(data, aes(x = GDPgro, y = Invgro)) + 
-geom_point() +
-labs(title = "GDP and Investment")+
-  geom_line(color = "blue") 
-# Create the plot using ggplot2
-ggplot(data, aes(x = GDPgro, y = Popgro)) +
-  geom_point() +
-labs(title = "GDP and Population")+
-  geom_line(color = "red") 
- 
-# Create the plot using ggplot2
-ggplot(data, aes(x = GDPgro, y = Electricitygro)) +
-  geom_point() +
-labs(title = "GDP and Electricity")+
-  geom_line(color = "green") 
-# Create the plot using ggplot2
-ggplot(data, aes(x = Invgro, y = Electricitygro)) +
-  geom_point() +
-labs(title = "Investment and Electricity")+
-  geom_line(color = "black") 
-# Create the plot using ggplot2
-ggplot(data, aes(x = Popgro, y = Electricitygro)) +
-    geom_point() +
-labs(title = "Population and Electricity")+
-  geom_line(color = "yellow") 
-# Create the plot using ggplot2
-ggplot(data, aes(x = Invgro, y = Electricitygro)) +
-    geom_point() +
-labs(title = "Investment and Electricity")+
-  geom_line(color = "purple") 
 # Create the plot using ggplot2 in one graph
 ggplot(data, aes(x = Years)) + 
   geom_line(aes(y = Invgro, colour = "Investment")) + 
@@ -128,29 +102,74 @@ ggplot(data, aes(x = Years)) +
   geom_line(aes(y = Electricitygro, colour = "Electricity")) +
   labs(title = "Investment, Population and Electricity")+
   scale_x_continuous(breaks = seq(1999, 2022, by = 2)) +
-  ylab("Values") +
+  ylab("Growth Values") +
   xlab("Year")
 
-# Compute correlation matrix
-correlation_matrix <- cor(data[, c("GDPgro", "Invgro", "Popgro", "Electricitygro")])
+# Here, we explore relationship between GDP Growth and Investment Growth
+ggplot(data, aes(x = GDPgro, y = Invgro)) + 
+geom_point() +
+labs(title = "GDP and Investment")+
+  geom_line(color = "blue") 
 
-# Visualize correlation matrix
-corrplot(correlation_matrix, method = "circle")
+# Here, we explore relationship between GDP Growth and Population Growth
+ggplot(data, aes(x = GDPgro, y = Popgro)) +
+  geom_point() +
+labs(title = "GDP and Population")+
+  geom_line(color = "red") 
+
+# Here, we explore relationship between GDP Growth and Electricity Growth 
+ggplot(data, aes(x = GDPgro, y = Electricitygro)) +
+  geom_point() +
+labs(title = "GDP and Electricity")+
+  geom_line(color = "darkgreen") 
+
+# Here, we explore relationship between Investment Growth and Electricity Growth
+ggplot(data, aes(x = Invgro, y = Electricitygro)) +
+    geom_point() +
+labs(title = "Investment and Electricity")+
+  geom_line(color = "purple") 
+
+# Here, we explore relationship between Population Growth and Electricity Growth 
+ggplot(data, aes(x = Popgro, y = Electricitygro)) +
+    geom_point() +
+labs(title = "Population and Electricity")+
+  geom_line(color = "orange") 
+
+# Here, we explore relationship between Investment Growth and Population Growth
+ggplot(data, aes(x = Invgro, y = Popgro)) +
+    geom_point() +
+labs(title = "Investment and Population")+
+  geom_line(color = "brown") 
+
 
 ```
 
->Explanation: In the first plot, GDP growth is represented on the x-axis, and Investment growth is represented on the y-axis. There appears to be a positive relationship between the two variables; higher investments correspond to higher GDP growth.
-In the second plot, GDP growth is represented on the x-axis, and Population growth is represented on the y-axis. There appears not to be a positive relationship between the two variables; even negative population changes correspond to higher GDP growth.
-In the third plot, GDP growth is represented on the x-axis, and Electricity consumption growth is represented on the y-axis. There appears to be a positive relationship between the two variables.
-In the fourth plot, Investment growth is represented on the x-axis, and Electricity consumption is represented on the y-axis. There appears to be a positive relationship between the two variables; higher investments correspond to higher electricity consumpton.
-In the fifth plot, population growth is represented on the x-axis, and Electricity consumption is represented on the y-axis. There appears not to be a positive relationship between the two variables.
-In the sixth plot, Investment growth is represented on the x-axis, and Population growth is represented on the y-axis. There appears not to be a significant relationship between the two variables.
-In the seventh plot, Investment growth, Population growth, and Electricity consumption growth are represented from 1999 to 2022. Population changes are smooth and stable, while electricity consumption changes occur within a short range. Investment growth fluctuates widely and is far from being stable from year to year.
-In the eight plot, a graphical representation of a correlation matrix using circles or ellipses. The size of each circle represents the magnitude of the correlation coefficient between two variables. Larger circles indicate stronger correlations, while smaller circles indicate weaker correlations. The color of each circle represents the sign of the correlation coefficient. Red shows positive correlations and blue shows negative correlation. There is a strong and positive raltionship between GDP growth, investment growth and electricity consumption growth. There is no positive relationship between population and Gdp growth as Solow-Swan model claimed. There is also no relationship between population growth-ivestment and population-electricity consumption.
+Explanation: 
+- In the first plot, Investment growth, Population growth, and Electricity consumption growth are represented from 1999 to 2022. Population changes are smooth and stable, while electricity consumption changes occur within a short range. Investment growth fluctuates widely and is far from being stable from year to year.
+- In the second plot, GDP growth is represented on the x-axis, and Investment growth is represented on the y-axis. There appears to be a positive relationship between the two variables; higher investments correspond to higher GDP growth. 
+- In the third plot, GDP growth is represented on the x-axis, and Population growth is represented on the y-axis. There appears not to be a positive relationship between the two variables; even negative population changes correspond to higher GDP growth. 
+- In the fourth plot, GDP growth is represented on the x-axis, and Electricity consumption growth is represented on the y-axis. There appears to be a positive relationship between the two variables. 
+- In the fifth plot, Investment growth is represented on the x-axis, and Electricity consumption is represented on the y-axis. There appears to be a positive relationship between the two variables; higher investments correspond to higher electricity consumpton. 
+- In the sixth plot, population growth is represented on the x-axis, and Electricity consumption is represented on the y-axis. There appears not to be a positive relationship between the two variables. 
+- In the seventh plot, Investment growth is represented on the x-axis, and Population growth is represented on the y-axis. There appears not to be a significant relationship between the two variables. 
 
-\newpage
+```{r correlation matrix, tidy=TRUE, error=FALSE, echo=FALSE}
+#Correlation Matrix
+  growth_data <- data[, c("GDPgro", "Popgro", "Invgro", "Electricitygro")]
+  correlation_matrix <- cor(growth_data, use = "complete.obs")
+  corrplot(correlation_matrix, method = "color", addCoef.col = "black",
+           tl.col = "black", tl.srt = 45, cl.pos = "b", type = "upper",
+           title = "Correlation Matrix of Growth Metrics")
+```
+Explanation: 
+The heatmap displays the correlation coefficients between GDP growth, population growth, investment growth, and electricity consumption growth in Turkiye. Dark blue indicates strong positive correlations, dark red signifies strong negative correlations, and lighter shades denote weaker relationships. Notably, investment growth and electricity consumption exhibit a strong positive correlation with GDP growth, while population growth shows a negligible relationship. This visual suggests that investment and electricity consumption are closely tied to economic performance.
+
+# Analysis
 ## Time Series Analysis
-```{r time.series, tidy=TRUE, error=FALSE}
+
+```{r time.series, tidy=TRUE, error=FALSE, echo=FALSE}
+#Merve + Ye
+#Need to check
 
 # creating time series for GDP data
 ts_GDPdata <- ts(data$GDPgro, start = min(1999), end = max(2022), frequency = 24)
@@ -174,30 +193,27 @@ plot(ts_Popdata.decomp)
 ts_Elecdata.decomp <- stl(ts_Elecdata, s.window = "periodic")
 plot(ts_Elecdata.decomp)
 
-#The following graphs should be the first graph for exploring the trend. But I'm not sure if this is time series.
+plot(ts_GDPdata.decomp, main = "GDP Growth Over Time")
+plot(ts_Invdata.decomp, main = "Investment Growth Over Time")
+plot(ts_Popdata.decomp, main = "Population Growth Over Time")
+plot(ts_Elecdata.decomp, main = "Electricity Consumption Growth Over Time")
 
-#Ye please fix this:
-#plot(ts_GDPdata.decomp, main = "GDP Growth Over Time", xlab = "Years", ylab = "GDP Growth")
-#plot(ts_Invdata.decomp, main = "Investment Growth Over Time", xlab = "Years", ylab = "Investment growth")
-#plot(ts_Popdata.decomp, main = "Population Growth Over Time", xlab = "Years", ylab = "Population growth")
-#plot(ts_Elecdata.decomp, main = "Electricity Consumption Growth Over Time", xlab = "Years", ylab = "electricity consumption growth")
+
 
 ```
-##we need to move it to somewhere else later
->Explanation: In the first plot, decomposed GDP growth data is presented. The data does not exhibit seasonality due to its yearly nature, and there is also no discernible upward or downward trend. However, following the Covid-19 pandemic, the shock creates outlier effects on the data.
-In the second plot, decomposed Investment growth data is presented. The data does not exhibit seasonality due to its yearly nature, and there is also no discernible upward or downward trend. However, following the Covid-19 pandemic, the shock creates outlier effects on the data.
-In the third plot, decomposed Population growth data is presented. The data does not exhibit seasonality due to its yearly nature, and there is also no discernible upward or downward trend. However, following the Covid-19 pandemic, the shock creates outlier effects on the data.
-In the fourth plot, decomposed Electricity consumption growth data is presented. The data does not exhibit seasonality due to its yearly nature, and there is also no discernible upward or downward trend. However, following the Covid-19 pandemic, the shock creates outlier effects on the data.
-In the fifth plot, GDP growth time series data is presented. The data does exhibit fluctuations, but apart from a few years, it shows an increase.
-In the sixth plot, Investment growth time series data is presented. The data does exhibit fluctuations, but apart from a few years, it shows an increase.
-In the seventh plot, Population growth time series data is presented. The data does exhibit fluctuations, but apart from a few years, it shows an increase.
-In the seventh plot, Electricity consumption growth time series data is presented. The data does exhibit fluctuations, but apart from a few years, it shows an increase.
+- **First Plot**: In the first plot, decomposed GDP growth data is presented. The data does not exhibit seasonality due to its yearly nature, and there is also no discernible upward or downward trend. However, following the Covid-19 pandemic, the shock creates outlier effects on the data. 
+- **Second Plot**: In the second plot, decomposed Investment growth data is presented. The data does not exhibit seasonality due to its yearly nature, and there is also no discernible upward or downward trend. However, following the Covid-19 pandemic, the shock creates outlier effects on the data. 
+- **Third Plot**: In the third plot, decomposed Population growth data is presented. The data does not exhibit seasonality due to its yearly nature, and there is also no discernible upward or downward trend. However, following the Covid-19 pandemic, the shock creates outlier effects on the data. 
+- **Fourth Plot**: In the fourth plot, decomposed Electricity consumption growth data is presented. The data does not exhibit seasonality due to its yearly nature, and there is also no discernible upward or downward trend. However, following the Covid-19 pandemic, the shock creates outlier effects on the data. 
+- **Fifth Plot**: In the fifth plot, GDP growth time series data is presented. The data does exhibit fluctuations, but apart from a few years, it shows an increase. 
+- **Sixth Plot**: In the sixth plot, Investment growth time series data is presented. The data does exhibit fluctuations, but apart from a few years, it shows an increase. 
+- **Seventh Plot**: In the seventh plot, Population growth time series data is presented. The data does exhibit fluctuations, but apart from a few years, it shows an increase. 
+- **Eighth Plot**: In the eighth plot, Electricity consumption growth time series data is presented. The data does exhibit fluctuations, but apart from a few years, it shows an increase.
 
+## Extracting Trend Components
 
-# Analysis
-### NOT SURE ABOUT THIS PART TEAM
-```{r}
-
+```{r tidy=TRUE, echo=FALSE, error=FALSE}
+#Fei + Merve
 
 ts_GDPdata.decomp <- decompose(ts_GDPdata)
 plot(ts_GDPdata.decomp)
@@ -210,60 +226,25 @@ plot(seasonal_GDP)
 # ACF plot
 acf(ts_GDPdata)
 
-
-# Plot time series
-plot(ts_GDPdata, main = "GDP Growth Over Time", xlab = "Year", ylab = "GDP Growth")
-lines(ts_Invdata, col = "blue")
-lines(ts_Popdata, col = "red")
-lines(ts_Elecdata, col = "green")
-legend("topright", legend = c("GDP Growth", "Investment Growth", "Population Growth", "Electricity Growth"), col = c("black", "blue", "red", "green"), lty = 1)
-
-
-
-
 ```
 
+### Summary and Conclusions
 
-\newpage
+When examining the decomposed data, it is evident that yearly data do not exhibit seasonality. 
+The graphs depicting GDP growth, investment growth, population growth, and electricity consumption growth do not display any upward or downward trends; instead, the data shows a horizontal and stationary pattern Positive relationships: 
+There is a positive relationship between investment growth and GDP growth. 
+There is a positive relationship between GDP growth and electricity consumption growth. 
+There is a positive relationship between investment growth and electricity consumption growth. 
+There is a negative relationship between population and GDP growth. 
+There is no clear relationship between population and electricity consumption growth. 
+There is no clear relationship between population and investment growth.
+GDP Forecast for next 5 years is exhibited.
 
-# Summary and Conclusions
-When examining the decomposed data, it is evident that yearly data do not exhibit seasonality. The graphs depicting GDP growth, investment growth, population growth, and electricity consumption growth do not display any upward or downward trends; instead, the data shows a horizontal and stationary pattern
-Positive relationships:
- There is a positive relationship between investment growth and GDP growth. 
- There is a positive relationship between GDP growth and electricity consumption growth. 
- There is a positive relationship between investment growth and electricity consumption growth.
- There is a negative relationship between population and GDP growth. 
-No clear relationships:
- There is no clear relationship between population and electricity consumption growth. 
- There is no clear relationship between population and investment growth. 
+## Regression Analysis
+### regression plots
 
-
-\newpage
-
-## Question1:
-How are GDP growth, population growth, investment growth, and electricity consumption interrelated in Turkiye from 1999 to 2022?
-
-
-
-#Exploratory Analysis 
-```{r regression analysis, tidy=TRUE, error=FALSE}
-
-  growth_data <- data[, c("GDPgro", "Popgro", "Invgro", "Electricitygro")]
-  correlation_matrix <- cor(growth_data, use = "complete.obs")
-  #only corrpplot part is needed here. We don't need to specify other parts.
-  corrplot(correlation_matrix, method = "color", addCoef.col = "black",
-           tl.col = "black", tl.srt = 45, cl.pos = "b", type = "upper",
-           title = "Correlation Matrix of Growth Metrics")
-```
-#Conlusion for Question1:
-The heatmap displays the correlation coefficients between GDP growth, population growth, investment growth, and electricity consumption growth in Turkiye. Dark blue indicates strong positive correlations, dark red signifies strong negative correlations, and lighter shades denote weaker relationships. Notably, investment growth and electricity consumption exhibit a strong positive correlation with GDP growth, while population growth shows a negligible relationship. This visual suggests that investment and electricity consumption are closely tied to economic performance.
-
-
-
-
-
-#Exploratory Analysis 
-```{r}
+```{r regression analysis, tidy=TRUE, error=FALSE, echo=FALSE}
+#Siyao + Ye
 
 # Perform linear regression of GDP growth on the other growth metrics
 lm_model <- lm(GDPgro ~ Popgro + Invgro + Electricitygro, data=data)
@@ -313,29 +294,15 @@ ggplot(diagnostic_data, aes(x = Leverage, y = Standardized_Residuals)) +
   theme_minimal()
 
 ```
-#Conclusion for Question2:
-These plots suggest that while the model fits to some degree, there are indications of non-linearity, potential heteroscedasticity, and influential points, all of which could affect the reliability of the regression model. 
-1. Residuals vs Fitted Plot:
-It reveals the residuals' spread against the predicted values (fitted values). The red dashed line at y=0 represents the expectation where residuals would lie if the model's predictions were perfect. The blue line shows a non-linear relationship suggesting the presence of non-linearity in the model.
-2.Normal Q-Q Plot:
-This plot is a graphical technique for determining if two data sets come from populations with a common distribution, in this case, if the residuals are normally distributed. Points deviating from the dashed line indicate departures from normality.
-3.Scale-Location Plot:
-It shows the spread of residuals, allowing us to check the assumption of equal variance (homoscedasticity). It seems that the residuals spread out in a non-constant manner against the fitted values, indicating potential heteroscedasticity.
 
-#Question3:Ye please review this
-In assessing the relationship between electricity consumption and GDP growth, how might outliers influence the regression model's results?
+Explanation:
+These plots suggest that while the model fits to some degree, there are indications of non-linearity, potential heteroscedasticity, and influential points, all of which could affect the reliability of the regression model. 1. Residuals vs Fitted Plot: It reveals the residuals' spread against the predicted values (fitted values). The red dashed line at y=0 represents the expectation where residuals would lie if the model's predictions were perfect. The blue line shows a non-linear relationship suggesting the presence of non-linearity in the model. 2.Normal Q-Q Plot: This plot is a graphical technique for determining if two data sets come from populations with a common distribution, in this case, if the residuals are normally distributed. Points deviating from the dashed line indicate departures from normality. 3.Scale-Location Plot: It shows the spread of residuals, allowing us to check the assumption of equal variance (homoscedasticity). It seems that the residuals spread out in a non-constant manner against the fitted values, indicating potential heteroscedasticity.
 
-#Background:
-Conduct an outlier analysis to identify data points that disproportionately influence the model's predictions.
+### Cook's Distance
 
-#Significance:
-By identifying and addressing outliers, we improve the model's accuracy and reliability, providing a sound basis for economic insights and decisions.
+```{r cook distance, tidy=TRUE, error=FALSE, echo=FALSE}
+#Siyao
 
-#Theoratical Context:
-Our analysis is based on the assumption that while most data points conform to a general trend, some may deviate due to various factors. Cook's distance is a measure used to identify these influential outliers within the regression context.
-
-#Exploratory Analysis 
-```{r}
 # Calculate Cook's distance for the model
 cooks.distance <- cooks.distance(lm_model)
 
@@ -352,6 +319,13 @@ abline(h = threshold, col = "red", lwd = 2, lty = 2)
 
 ```
 
-#Conclusion for Question3:
-In this plot, while most points are within acceptable bounds, a few points significantly exceed the threshold, indicating they are outliers with substantial influence on the model. 
- 
+Explanation: 
+In this plot, while most points are within acceptable bounds, a few points significantly exceed the threshold, indicating they are outliers with substantial influence on the model.
+
+## Conclusion
+By identifying and addressing outliers, we improve the model's accuracy and reliability, providing a sound basis for economic insights and decisions. Our analysis is based on the assumption that while most data points conform to a general trend, some may deviate due to various factors. Cook's distance is a measure used to identify these influential outliers within the regression context.
+
+The Cook's Distance Plot shown illustrates the influence of each data point in a regression analysis. Data points with higher Cook's Distance values are more influential, meaning they have a greater effect on the calculated regression line. The red dashed line represents a commonly used threshold; data points above this line are considered to have a significant impact and could potentially be outliers.
+
+We use Cook's Distance to identify such influential points because if they are the result of errors or special conditions not applicable to the rest of the dataset, they can distort the results of the analysis. Recognizing these points allows an analyst to make informed decisions about whether to include them in the analysis, which can lead to a more accurate and reliable model. In your plot, several points exceed the threshold, indicating they are influential and should be assessed further to maintain the integrity of your regression results.
+In our plot, several points exceed the threshold, indicating they are influential and should be assessed further to maintain the integrity of our regression results.
