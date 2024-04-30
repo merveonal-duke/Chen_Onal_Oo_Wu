@@ -86,6 +86,8 @@ This analysis uses three databases: (https://ytbsbilgi.teias.gov.tr/ytbsbilgi/fr
 
 # Exploratory Analysis
 
+First, we will explore what has been going on in Turkiye in terms of investment growth, population growth and electricity consumption growth
+
 ```{r trendline, tidy=TRUE, error=FALSE, echo=FALSE,  fig.cap="Investment, Population and Electricity", fig.width=7, fig.height=4, fig.align='center', }
 
 # Merve + Fei
@@ -94,8 +96,6 @@ create_ts_plot <- function(data, variable_name, main_title, xlab_title, ylab_tit
   plot(data, main = main_title, xlab = xlab_title, ylab = ylab_title)
 }
  
-#First, we will explore what has been going on in Turkiye in terms of investment growth, population growth and electricity consumption growth
-
 # Create the plot using ggplot2 in one graph
 ggplot(data, aes(x = Years)) + 
   geom_line(aes(y = Invgro, colour = "Investment")) + 
