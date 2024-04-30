@@ -1,9 +1,4 @@
-\newpage
 \tableofcontents 
-\newpage
-\listoftables 
-\newpage
-\listoffigures 
 \newpage
 
 ---
@@ -19,8 +14,8 @@ editor_options:
 
 #Fei+Ye
 #Installing packages 
-install.packages("corrplot")
-install.packages("package_name")
+#install.packages("corrplot")
+#install.packages("package_name")
 
 #Loading packages
 library(corrplot);library(forecast);
@@ -85,7 +80,7 @@ This analysis uses three databases: (https://ytbsbilgi.teias.gov.tr/ytbsbilgi/fr
 
 # Exploratory Analysis
 
-```{r trendline, tidy=TRUE, error=FALSE, echo=FALSE}
+```{r trendline, tidy=TRUE, error=FALSE, echo=FALSE,  fig.cap="My Figure Caption", fig.width=6, fig.height=4, fig.align='center', out.width='70%'}
 
 # Merve + Fei
 # Function to create time series plot with custom title and axis labels
@@ -154,6 +149,7 @@ Explanation:
 - In the seventh plot, Investment growth is represented on the x-axis, and Population growth is represented on the y-axis. There appears not to be a significant relationship between the two variables. 
 
 ```{r correlation matrix, tidy=TRUE, error=FALSE, echo=FALSE}
+
 #Correlation Matrix
   growth_data <- data[, c("GDPgro", "Popgro", "Invgro", "Electricitygro")]
   correlation_matrix <- cor(growth_data, use = "complete.obs")
@@ -161,6 +157,7 @@ Explanation:
            tl.col = "black", tl.srt = 45, cl.pos = "b", type = "upper",
            title = "Correlation Matrix of Growth Metrics")
 ```
+
 Explanation: 
 The heatmap displays the correlation coefficients between GDP growth, population growth, investment growth, and electricity consumption growth in Turkiye. Dark blue indicates strong positive correlations, dark red signifies strong negative correlations, and lighter shades denote weaker relationships. Notably, investment growth and electricity consumption exhibit a strong positive correlation with GDP growth, while population growth shows a negligible relationship. This visual suggests that investment and electricity consumption are closely tied to economic performance.
 
