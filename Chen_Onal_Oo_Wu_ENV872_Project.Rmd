@@ -11,6 +11,7 @@ output:
 title: "Factors influencing Turkiye's Growth"
 author: "Fei Wu, Merve Onal, Siyao Chen, Ye Khaung Oo"
 date: "2024-04-30"
+URL: https://github.com/merveonal-duke/Chen_Onal_Oo_Wu
 output: pdf_document
 geometry: margin=2.54cm
 editor_options: 
@@ -235,27 +236,19 @@ plot(ts_Elecdata.decomp, main = "Electricity Consumption Growth Over Time")
 
 \newpage
 
-```{r to.ask.Merve, echo=FALSE, tidy=TRUE}
-#**Fifth Plot**: In the fifth plot, GDP growth time series data is presented. The data does exhibit fluctuations, but apart from a few years, it shows an increase. 
-# **Sixth Plot**: In the sixth plot, Investment growth time series data is presented. The data does exhibit fluctuations, but apart from a few years, it shows an increase. 
-# **Seventh Plot**: In the seventh plot, Population growth time series data is presented. The data does exhibit fluctuations, but apart from a few years, it shows an increase. 
-# **Eighth Plot**: In the eighth plot, Electricity consumption growth time series data is presented. The data does exhibit fluctuations, but apart from a few years, it shows an increase.
-```
 ### Extracting Trend Components
 
-```{r tidy=TRUE, echo=FALSE, error=FALSE,  fig.cap="", fig.width=7, fig.height=4, fig.align='center', out.width='80%'}
+```{r ts.gdp, tidy=TRUE, echo=FALSE, error=FALSE,  fig.cap="", fig.width=7, fig.height=4, fig.align='center'}
 #Fei + Merve
 
 ts_GDPdata.decomp <- decompose(ts_GDPdata)
 plot(ts_GDPdata.decomp)
+```
+
+```{r extract, tidy=TRUE, echo=FALSE, error=FALSE,  fig.cap="", fig.width=7, fig.height=4, fig.align='center'}
 # Extract trend component
 trend_GDP <- ts_GDPdata.decomp$trend
 plot(trend_GDP)
-# Extract seasonal component
-seasonal_GDP <- ts_GDPdata.decomp$seasonal
-plot(seasonal_GDP)
-# ACF plot
-acf(ts_GDPdata)
 
 ```
 \newpage
@@ -263,14 +256,15 @@ acf(ts_GDPdata)
 ### Summary and Conclusions
 
 When examining the decomposed data, it is evident that yearly data do not exhibit seasonality. 
-The graphs depicting GDP growth, investment growth, population growth, and electricity consumption growth do not display any upward or downward trends; instead, the data shows a horizontal and stationary pattern Positive relationships: 
-There is a positive relationship between investment growth and GDP growth. 
-There is a positive relationship between GDP growth and electricity consumption growth. 
-There is a positive relationship between investment growth and electricity consumption growth. 
-There is a negative relationship between population and GDP growth. 
-There is no clear relationship between population and electricity consumption growth. 
-There is no clear relationship between population and investment growth.
-GDP Forecast for next 5 years is exhibited.
+The graphs depicting GDP growth, investment growth, population growth, and electricity consumption growth do not display any upward or downward trends; instead, the data shows a horizontal and stationary pattern.
+
+Positive relationships: 
+- There is a positive and strong (0.89) relationship between investment growth and GDP growth. 
+- There is a positive and strong (0.74) relationship between GDP growth and electricity consumption growth. 
+- There is a positive and strong (0.77) relationship between investment growth and electricity consumption growth. 
+- There is a negative (-0.2) relationship between population and GDP growth unlike the Solow-Swan model claimed. 
+- There is no prominent relationship between population and electricity consumption growth. 
+- There is no prominent relationship between population and investment growth.
 
 ## Regression Analysis
 ### Regression plots
